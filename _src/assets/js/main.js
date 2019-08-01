@@ -1,31 +1,33 @@
-'use strict';
-debugger
+"use strict";
 
-function getRandomArbitrary(min, max) {
-    const randomNumber = parseInt(Math.random() * (max - min) + min);
-    return randomNumber;
+function getRandomNumber(max) {
+    return Math.ceil(Math.random() * max);
 }
+
+const myRandomNumber = getRandomNumber(100);
+console.log(`Mi número aleatorio es ${myRandomNumber}`);
+
+const inputNumber = document.querySelector(".js-inputNumber");
+const message = document.querySelector(".js-message");
+
+let counter = 0;
+const counterNumber = document.querySelector(".js-counter");
 
 function getMessage(event) {
-    const numberResult = getRandomArbitrary(0, 100);
-    const message = document.querySelector(".js-message");
-    const inputNumber = document.querySelector(".js-inputNumber");
-    const inputNumberContent = document.querySelector(".js-inputNumber").value;
-    debugger
-
-    if (inputNumber === numberResult) {
-        message.innerHTML = '¡HAS GANADO, CAMPEONA!';
-    } else if (inputNumber < numberResult) {
-        message.innerHTML = 'demasiado bajo';
+    counter = counter + 1;
+    counterNumber.innerHTML = counter;
+    if (inputNumber.value > 100 || inputNumber.value < 1) {
+        message.innerHTML = "Escribe un número entre 1 y 100";
+    } else if (inputNumber.value == myRandomNumber) {
+        message.innerHTML = "¡HAS GANADO, CAMPEONA!";
+    } else if (inputNumber.value < myRandomNumber) {
+        message.innerHTML = "demasiado bajo";
     } else {
-        message.innerHTML = 'demasiado alto';
+        message.innerHTML = "demasiado alto";
     }
-    console.log(Math.ceil(numberResult));
-    console.log(numberResult);
-    console.log(inputNumber);
-    console.log(inputNumberContent);
+    console.log(inputNumber.value);
+    console.log(myRandomNumber);
 }
 
-
-const button = document.querySelector('.js-button');
-button.addEventListener('click', getMessage);
+const button = document.querySelector(".js-button");
+button.addEventListener("click", getMessage);
